@@ -10,9 +10,22 @@
                    align-right'
         >
 
-          <li class='user-info'>
+          <li class='user-info'
+              v-if='userValidated'
+          >
+            <a href="#"
+               v-on:click='handleSignOut'
+            >
+              Logout
+            </a>
+
+          </li>
+
+          <li class='user-info'
+              v-else
+          >
             <a href='#'
-               v-on:click='passOauth'
+               v-on:click='handleSignIn'
             >
               <i class='fi-social-google-plus'></i>
               Login
@@ -21,7 +34,7 @@
 
           <ul class='menu'>
             <li>
-              <a href='#'
+              <a href='http://localhost:3000/recipes'
                  class='menu-text'
               >
                 SnackTrack
@@ -38,7 +51,23 @@
 
 <script>
 export default {
-  props: ['passOauth']
+  data() {
+    return {
+      userValidated: false
+    }
+  },
+  props: ['signIn', 'signOut'],
+  methods: {
+    handleSignIn() {
+      this.userValidated = true
+      this.signIn()
+    },
+
+    handleSignOut() {
+      this.userValidated = false
+      this.signOut()
+    }
+  }
 }
 </script>
 
