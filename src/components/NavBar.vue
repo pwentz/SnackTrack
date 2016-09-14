@@ -11,10 +11,10 @@
         >
 
           <li class='user-info'
-              v-if='userValidated'
+              v-if='$store.state.signedIn'
           >
             <a href="#"
-               v-on:click='handleSignOut'
+               v-on:click='signOut'
             >
               Logout
             </a>
@@ -25,7 +25,7 @@
               v-else
           >
             <a href='#'
-               v-on:click='handleSignIn'
+               v-on:click='signIn'
             >
               <i class='fi-social-google-plus'></i>
               Login
@@ -34,7 +34,8 @@
 
           <ul class='menu'>
             <li>
-              <a href='http://localhost:3000/recipes'
+              <a href='#'
+                 v-on:click='testStore'
                  class='menu-text'
               >
                 SnackTrack
@@ -51,23 +52,7 @@
 
 <script>
 export default {
-  data() {
-    return {
-      userValidated: false
-    }
-  },
-  props: ['signIn', 'signOut'],
-  methods: {
-    handleSignIn() {
-      this.userValidated = true
-      this.signIn()
-    },
-
-    handleSignOut() {
-      this.userValidated = false
-      this.signOut()
-    }
-  }
+  props: ['signIn', 'signOut', 'testStore']
 }
 </script>
 

@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <nav-bar
-      :signIn='handleOauth'
+      :signIn='signInUser'
+      :testStore='testThing'
       :signOut='signOutUser'
     >
     </nav-bar>
@@ -11,40 +12,22 @@
 <script>
 require('./env.js')
 import NavBar from './components/NavBar.vue'
-import Ajax from './ajax.js'
-const api = new Ajax
-const clientId = process.env.google_client_id
-const apiKey = process.env.google_api_key
-const scopes = 'profile email'
-let auth2
 
 export default {
   components: {
     NavBar
   },
-  data() {
-    return {
-    }
-  },
   methods: {
-    handleOauth() {
-      gapi.load('client:auth2', this.initOauth)
-    },
-
-    initOauth() {
-      gapi.client.setApiKey(apiKey)
-      gapi.auth2.init({
-        client_id: clientId,
-        scope: scopes
-      })
-      .then( () => {
-        auth2 = gapi.auth2.getAuthInstance();
-        auth2.signIn();
-      })
+    signInUser() {
+      this.$store.dispatch('LOGIN')
     },
 
     signOutUser() {
-      auth2.signOut();
+      this.$store.dispatch('LOGOUT')
+    },
+
+    testThing() {
+      console.log(this.$store.state.signedIn)
     }
   }
 }
