@@ -1,6 +1,28 @@
 body {
   font-family: Helvetica, sans-serif;
 }
+.background {
+  background-image: url('../assets/food-background.jpg');
+  background-position: center;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+.header {
+  font-family: Pacifico;
+  text-align: center;
+  margin-top: 50px;
+  font-size: 72px;
+}
+.food-search {
+  width: 350px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
 .nav-bar-primary {
   background-color: #b3d6ff;
 }
@@ -19,4 +41,16 @@ body {
   font-family: Raleway;
   font-size: 20px;
   font-weight: 800;
+}
+.ingredient {
+  width: 350px;
+  margin: 0 auto;
+  height: 150px;
+}
+.food-name {
+}
+
+.food-name h5 {
+  font-family: Raleway;
+  text-align: center;
 }

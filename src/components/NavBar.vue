@@ -1,57 +1,77 @@
 <template>
-  <div class='nav-bar-primary'>
-    <div class='row'>
-      <div class='small-12
-                  columns'
-      >
-
-        <ul class='dropdown
-                   menu
-                   align-right'
+  <div class='nav-bar-container'>
+    <div class='nav-bar-primary'>
+      <div class='row'>
+        <div class='small-12
+                    columns'
         >
 
-          <li class='user-info'
-              v-if='$store.state.signedIn'
+          <ul class='dropdown menu
+                     align-right'
+              data-dropdown-menu
           >
-            <a href="#"
-               v-on:click='signOut'
+
+
+            <li class='user-info'
+                v-if='$store.state.signedIn'
             >
-              Logout
-            </a>
-
-          </li>
-
-          <li class='user-info'
-              v-else
-          >
-            <a href='#'
-               v-on:click='signIn'
-            >
-              <i class='fi-social-google-plus'></i>
-              Login
-            </a>
-          </li>
-
-          <ul class='menu'>
-            <li>
-              <a href='#'
-                 v-on:click='testStore'
-                 class='menu-text'
+              <a href="#"
+                 v-on:click='signOut'
               >
-                SnackTrack
+                Logout
+              </a>
+
+            </li>
+
+            <li class='user-info'
+                v-else
+            >
+              <a href='#'
+                 v-on:click='signIn'
+              >
+                <i class='fi-social-google-plus'></i>
+                Login
               </a>
             </li>
+
+            <li v-if='$store.state.signedIn'
+                data-dropdown='pantry-dropdown'
+                aria-controls='pantry-dropdown'
+                aria-expanded='false'
+            >
+              <a href='#'
+                 v-on:click="$store.dispatch('PANTRY_EXPANDED', !$store.state.pantryExpanded)"
+              >Pantry</a>
+            </li>
+
+            <ul class='menu'>
+              <li>
+                <a href='#'
+                   v-on:click='testStore'
+                   class='menu-text'
+                >
+                  SnackTrack
+                </a>
+              </li>
+            </ul>
+
           </ul>
-
-        </ul>
-
+        </div>
       </div>
     </div>
+    <pantry-ingredients
+        v-if='$store.state.pantryExpanded'
+    >
+    </pantry-ingredients>
   </div>
 </template>
 
 <script>
+import PantryIngredients from './PantryIngredients.vue'
 export default {
+  components: {
+    PantryIngredients
+  },
   props: ['signIn', 'signOut', 'testStore']
 }
 </script>
