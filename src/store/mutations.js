@@ -56,13 +56,24 @@ const mutations = {
     api.fetchRecipes(ingredients).
       then(response => {
         Vue.set(state, 'recipes', response.body)
-        console.log(response.body)
       })
   },
 
   REMOVE_FROM_PANTRY (state, ingredientId) {
     api.
       destroyPantryIngredient(ingredientId, state.currentUser).
+      then(response => {
+        Vue.set(state, 'pantryIngredients', response.body)
+      })
+  },
+
+  RENDER_RECIPES (state) {
+    Vue.set(state, 'recipesRendered', !state.recipesRendered)
+  },
+
+  REMOVE_BY_RECIPE (state, ingredients) {
+    api.
+      updatePantryIngredients(ingredients, state.currentUser).
       then(response => {
         Vue.set(state, 'pantryIngredients', response.body)
       })
