@@ -1,12 +1,13 @@
 const state = {
-  signedIn: false,
-  searchTerm: '',
-  foodDropDown: false,
   searchResults: [],
-  pantryExpanded: false,
+  recipes: [],
   pantryIngredients: [],
+  signedIn: false,
+  foodDropDown: false,
+  pantryExpanded: false,
+  searchTerm: '',
   currentUser: '',
   addedIngredientId: '',
-  addedIngredientQuantity: ''
+  addedIngredientAmount: ''
 }
 module.exports = state

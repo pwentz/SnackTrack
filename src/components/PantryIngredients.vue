@@ -16,9 +16,11 @@
           v-for='ingredient in $store.state.pantryIngredients'
         >
           <pantry-ingredient
+            :id='ingredient.id'
             :name='ingredient.name'
-            :quantity='ingredient.quantity'
+            :amount='ingredient.amount'
             :image='ingredient.image'
+            :removeIngredient='removeIngredient'
           >
           </pantry-ingredient>
         </div>
@@ -30,6 +32,7 @@
 <script>
 import PantryIngredient from './PantryIngredient.vue'
 export default {
+  props: ['removeIngredient'],
   components: {
     PantryIngredient
   }
@@ -44,6 +47,7 @@ export default {
   z-index: 99;
   margin-top: 65px;
   margin-right: 150px;
+  background-color: lightgrey;
 }
 .pantry-item {
   width: 250px;

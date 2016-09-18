@@ -26,15 +26,16 @@
         <div
           class='row'
         >
-          <p>{{ this.quantity }}</p>
+          <p>{{ this.amount }}</p>
         </div>
 
         <div
           class='row'
         >
-          <div>
+          <div class='icon'>
             <a href='#'
                class='pantry-x'
+               v-on:click='removeIngredient(id)'
             >
               <i class='fi-x'></i>
             </a>
@@ -49,7 +50,7 @@
 
 <script>
 export default {
-  props: ['name', 'quantity', 'image'],
+  props: ['name', 'amount', 'image', 'removeIngredient', 'id'],
   computed: {
     url() {
       return `https://spoonacular.com/cdn/ingredients_100x100/${this.image}`
@@ -62,4 +63,5 @@ export default {
 .pantry-x, .pantry-x:hover {
   color: maroon;
 }
+
 </style>

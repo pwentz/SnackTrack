@@ -9,10 +9,10 @@ class Ajax {
     )
   }
 
-  addIngredient(ingredientId, quantity, currentUser) {
+  addIngredient(ingredientId, amount, currentUser) {
     return Vue.http.post(
-      `http://localhost:3000/api/v1/user_ingredients/${ingredientId}/add_to_pantry.json`,
-      { 'googleId': currentUser, 'quantity': quantity }
+      `http://localhost:3000/api/v1/pantry_ingredients/${ingredientId}.json`,
+      { 'googleId': currentUser, 'amount': amount }
     )
   }
 
@@ -20,6 +20,20 @@ class Ajax {
     return Vue.http.post(
       'http://localhost:3000/api/v1/users/sign_in.json',
       { 'googleId': userId, 'userName': userName }
+    )
+  }
+
+  fetchRecipes(ingredients) {
+    return Vue.http.get(
+      'http://localhost:3000/api/v1/recipes/search.json',
+      { 'params': { 'ingredients': ingredients } }
+    )
+  }
+
+  destroyPantryIngredient(ingredientId, googleId) {
+    return Vue.http.delete(
+      `http://localhost:3000/api/v1/pantry_ingredients/${ingredientId}.json`,
+      { 'params': { 'googleId': googleId } }
     )
   }
 }
