@@ -4,6 +4,7 @@
       :signIn='signInUser'
       :testStore='testThing'
       :signOut='signOutUser'
+      :removeIngredient='handleDelete'
     >
     </nav-bar>
     <h1 class='header'>
@@ -14,6 +15,12 @@
       :addToPantry='addToPantry'
     >
     </food-search>
+    <button class='button
+                   warning'
+            v-on:click='fetchRecipes'
+    >
+      <i class='fi-save'></i>
+    </button>
   </div>
 </template>
 
@@ -59,15 +66,23 @@ export default {
       console.log(this.$store.state.currentUser)
       this.pantryIngredients.forEach(obj => {
         console.log(obj.name)
-        console.log(obj.quantity)
+        console.log(obj.amount)
         console.log(obj.image)
       })
     },
 
-    addToPantry(id, quantity) {
+    addToPantry(id, amount) {
       this.$store.dispatch('ADD_INGREDIENT_ID', id)
-      this.$store.dispatch('ADD_INGREDIENT_QUANTITY', quantity)
+      this.$store.dispatch('ADD_INGREDIENT_AMOUNT', amount)
       this.$store.dispatch('ADD_TO_PANTRY')
+    },
+
+    fetchRecipes() {
+      this.$store.dispatch('LOAD_RECIPES', this.pantryIngredients)
+    },
+
+    handleDelete(ingredientId) {
+      this.$store.dispatch('REMOVE_FROM_PANTRY', ingredientId)
     }
   }
 }

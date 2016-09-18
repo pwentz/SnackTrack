@@ -21,20 +21,20 @@
       >
         <div
           class='row
-                 quantity-count'
+                 amount-count'
         >
           <i class='fi-plus'
-             v-on:click='++quantity'
+             v-on:click='++amount'
           ></i>
-          {{ quantity }}
+          {{ amount }}
           <i class='fi-minus'
-            v-on:click='--quantity'
+            v-on:click='--amount'
           ></i>
         </div>
 
         <div class='row'>
           <button
-            v-on:click="addIngredient(id, quantity)"
+            v-on:click="addIngredient(id, amount)"
             class='success
                    button'
           >
@@ -49,7 +49,7 @@
 export default {
   data() {
     return {
-      quantity: 1
+      amount: 1
     }
   },
   props: ['name', 'image', 'id', 'addIngredient'],

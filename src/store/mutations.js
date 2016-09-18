@@ -37,8 +37,8 @@ const mutations = {
 
   ADD_TO_PANTRY (state) {
     let id = state.addedIngredientId
-    let quantity = state.addedIngredientQuantity
-    api.addIngredient(id, quantity, state.currentUser).
+    let amount = state.addedIngredientAmount
+    api.addIngredient(id, amount, state.currentUser).
       then(response => {
         Vue.set(state, 'pantryIngredients', response.body)
       })
@@ -48,8 +48,24 @@ const mutations = {
     Vue.set(state, 'addedIngredientId', id)
   },
 
-  ADD_INGREDIENT_QUANTITY (state, quantity) {
-    Vue.set(state, 'addedIngredientQuantity', quantity)
+  ADD_INGREDIENT_AMOUNT (state, amount) {
+    Vue.set(state, 'addedIngredientAmount', amount)
+  },
+
+  LOAD_RECIPES (state, ingredients) {
+    api.fetchRecipes(ingredients).
+      then(response => {
+        Vue.set(state, 'recipes', response.body)
+        console.log(response.body)
+      })
+  },
+
+  REMOVE_FROM_PANTRY (state, ingredientId) {
+    api.
+      destroyPantryIngredient(ingredientId, state.currentUser).
+      then(response => {
+        Vue.set(state, 'pantryIngredients', response.body)
+      })
   }
 
 }

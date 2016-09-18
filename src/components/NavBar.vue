@@ -61,6 +61,7 @@
     </div>
     <pantry-ingredients
         v-if='$store.state.pantryExpanded'
+        :removeIngredient='removeIngredient'
     >
     </pantry-ingredients>
   </div>
@@ -72,7 +73,7 @@ export default {
   components: {
     PantryIngredients
   },
-  props: ['signIn', 'signOut', 'testStore']
+  props: ['signIn', 'signOut', 'testStore', 'removeIngredient']
 }
 </script>
 
