@@ -8,6 +8,21 @@
       aria-controls='food-dropdown'
       aria-expanded='false'
     >
+
+    <div class='row'>
+      <div
+        class='small-5
+               columns
+               small-centered'
+      >
+        <button class='button
+                       recipe-button'
+                v-on:click='fetchRecipes'
+        >
+          Get Recipes!
+        </button>
+    </div>
+
     <food-results
       v-if='$store.state.foodDropDown'
       :addIngredient='addToPantry'
@@ -23,7 +38,7 @@ export default {
   components: {
     FoodResults
   },
-  props: ['searchForFood', 'addToPantry']
+  props: ['searchForFood', 'addToPantry', 'fetchRecipes']
 }
 </script>
 
@@ -32,5 +47,8 @@ export default {
   width: 350px;
   margin: 0 auto;
   margin-top: 50px;
+}
+.recipe-button {
+  margin: 0 auto;
 }
 </style>
