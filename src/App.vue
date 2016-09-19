@@ -7,14 +7,25 @@
       :removeIngredient='handleDelete'
     >
     </nav-bar>
-    <h1 class='header'>
+    <h1 class='header'
+        v-if='!$store.state.recipesRendered'
+    >
       Let's get cooking...
     </h1>
+
     <food-search
+      v-if='!$store.state.recipesRendered'
       :searchForFood='searchForFood'
       :addToPantry='addToPantry'
     >
     </food-search>
+
+    <recipes
+      v-else
+      :passIngredients='handleRecipe'
+    >
+    </recipes>
+
     <button class='button
                    warning'
             v-on:click='fetchRecipes'
@@ -28,16 +39,19 @@
 require('./env.js')
 import NavBar from './components/NavBar.vue'
 import FoodSearch from './components/FoodSearch.vue'
+import Recipes from './components/Recipes.vue'
 
 export default {
   components: {
     NavBar,
-    FoodSearch
+    FoodSearch,
+    Recipes
   },
   vuex: {
     getters: {
       searchTerm: state => state.searchTerm,
-      pantryIngredients: state => state.pantryIngredients
+      pantryIngredients: state => state.pantryIngredients,
+      recipes: state => state.recipes
     }
   },
   methods: {
@@ -79,10 +93,24 @@ export default {
 
     fetchRecipes() {
       this.$store.dispatch('LOAD_RECIPES', this.pantryIngredients)
+      this.$store.dispatch('RENDER_RECIPES')
+      this.recipes.forEach(recipe => {
+        console.log(recipe)
+      })
     },
 
     handleDelete(ingredientId) {
       this.$store.dispatch('REMOVE_FROM_PANTRY', ingredientId)
+    },
+
+    handleRecipe(ingredients) {
+      let names = this.pantryIngredients.map(i => i.name)
+      let recipeIngredients = ingredients.filter(item => {
+        return names.indexOf(item.name) !== -1
+      })
+      if (confirm("Log recipe as eaten? If yes, we will remove the necessary ingredients from your pantry")) {
+        this.$store.dispatch('REMOVE_BY_RECIPE', recipeIngredients)
+      }
     }
   }
 }

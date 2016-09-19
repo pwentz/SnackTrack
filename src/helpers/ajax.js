@@ -36,6 +36,13 @@ class Ajax {
       { 'params': { 'googleId': googleId } }
     )
   }
+
+  updatePantryIngredients(ingredients, googleId) {
+    return Vue.http.patch(
+      `http://localhost:3000/api/v1/pantry_ingredients.json`,
+      { 'googleId': googleId, 'recipe_ingredients': ingredients }
+    )
+  }
 }
 
 module.exports = new Ajax()

@@ -5,6 +5,7 @@ const state = {
   signedIn: false,
   foodDropDown: false,
   pantryExpanded: false,
+  recipesRendered: false,
   searchTerm: '',
   currentUser: '',
   addedIngredientId: '',
