@@ -2,22 +2,31 @@ body {
   font-family: Helvetica, sans-serif;
   position: relative;
 }
-.background {
-  background-image: url('../assets/food-background.jpg');
+.app-background {
+  background-image: url('../assets/food_background.jpg');
   background-position: center;
-  opacity: 0.6;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: -1;
+  background-attachment: fixed;
 }
 .header {
   font-family: Pacifico;
   text-align: center;
   margin-top: 50px;
   font-size: 72px;
+}
+.food-search {
+  width: 350px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+.recipe-button {
+  margin: 0 auto;
+  font-family: Raleway;
+  background-color: #b3d6ff;
+  color: black;
+}
+.recipe-button:hover {
+  background-color: #ffae00;
+  color: black;
 }
 .nav-bar-primary {
   background-color: #b3d6ff;
@@ -38,13 +47,70 @@ body {
   font-size: 20px;
   font-weight: 800;
 }
-.food-search {
-  width: 350px;
-  margin: 0 auto;
-  margin-top: 50px;
+.recipe {
+  margin: 0 0 1rem;
+  padding: 1rem;
+  border: 1px solid hsla(0, 0%, 4%, .25);
+  border-radius: 0;
+  position: relative;
 }
-.recipe-button {
+
+.recipes-header {
+  font-family: Pacifico;
+  text-align: center;
+}
+
+.recipe-background {
+  position: absolute;
+  background-color: white;
+  opacity: 0.9;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.recipes-container {
+  margin-top: 25px;
+}
+
+.recipe-image {
+  height: 450px;
+  width: 600px;
+  z-index: 1;
+}
+.recipe-instructions {
+  margin-top: 20px;
+  font-family: Raleway;
+}
+#recipe-header {
+  text-align: center;
+  font-family: Pacifico;
+}
+.btn-container {
   margin: 0 auto;
+}
+#recipe-image {
+  border-radius: 12px;
+}
+.recipes-index-button {
+  background-color: #b3d6ff;
+  color: black;
+  font-family: Raleway;
+}
+.recipes-index-button:hover {
+  color: black;
+  background-color: #ffae00;
+}
+.eat-button {
+  color: black;
+  background-color: #ffae00;
+  font-family: Raleway;
+}
+.eat-button:hover {
+  color: white;
+  background-color: maroon;
 }
 #pantry-ingredients {
   position: absolute;
@@ -56,8 +122,8 @@ body {
   background-color: lightgrey;
 }
 .pantry-item {
-  width: 250px;
-  height: 100px;
+  width: 350px;
+  height: 150px;
 }
 .pantry-item h5 {
   text-align: center;
@@ -65,45 +131,32 @@ body {
 .ingredient {
   width: 350px;
   margin: 0 auto;
-  height: 150px;
-}
-.recipe {
-  height: 450px;
-  width: 600px;
-  margin: 0 0 1rem;
-  padding: 1rem;
-  border: 1px solid hsla(0, 0%, 4%, .25);
-  border-radius: 0;
-  position: relative;
-}
-
-.recipe-background {
-  position: absolute;
-  background-color: white;
-  opacity: 0.6;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: -1;
-}
-
-.recipe-ingredient-container {
-  list-style-type: none;
-}
-
-.recipe-image {
-  height: 450px;
-  width: 600px;
-  z-index: 50;
+  height: 175px;
 }
 .pantry-x, .pantry-x:hover {
   color: maroon;
+  margin-left: 15px;
 }
-.food-name {
+.p-ingredient-details {
+  font-family: Raleway;
 }
-
+.p-ingredient-name {
+  font-family: Raleway;
+  text-align: center;
+}
+.fi-plus {
+  color: green;
+}
+.fi-minus {
+  color: maroon;
+}
+.amount-count h4 {
+  font-family: Raleway;
+}
 .food-name h5 {
   font-family: Raleway;
   text-align: center;
+}
+.add-button {
+  margin-top: 10px;
 }

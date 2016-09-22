@@ -13,34 +13,32 @@
              food-name'
       >
       <h5>{{ name }}</h5>
+      <button
+        v-on:click="addIngredient(id, amount)"
+        class='success
+               add-button
+               button'
+      >
+       Add!
+      </button>
     </div>
 
     <div
       class='small-3
              columns'
+    >
+      <div
+        class='row
+               amount-count'
       >
-        <div
-          class='row
-                 amount-count'
-        >
-          <i class='fi-plus'
-             v-on:click='++amount'
-          ></i>
-          {{ amount }}
-          <i class='fi-minus'
-            v-on:click='--amount'
-          ></i>
-        </div>
-
-        <div class='row'>
-          <button
-            v-on:click="addIngredient(id, amount)"
-            class='success
-                   button'
-          >
-           Add!
-          </button>
-        </div>
+        <i class='fi-plus'
+           v-on:click='++amount'
+        ></i>
+        <h4>{{ amount }}</h4>
+        <i class='fi-minus'
+          v-on:click='--amount'
+        ></i>
+      </div>
     </div>
   </div>
 </template>
@@ -62,11 +60,20 @@ export default {
 </script>
 
 <style>
-.food-name {
+.fi-plus {
+  color: green;
 }
-
+.fi-minus {
+  color: maroon;
+}
+.amount-count h4 {
+  font-family: Raleway;
+}
 .food-name h5 {
   font-family: Raleway;
   text-align: center;
+}
+.add-button {
+  margin-top: 10px;
 }
 </style>

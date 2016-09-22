@@ -1,8 +1,15 @@
 <template>
-  <div>
+  <div
+    class='row
+           recipes-container'
+  >
+    <h2
+      class='recipes-header'
+    >
+      Recipes
+    </h2>
     <div
       v-for='validRecipe in $store.state.recipes'
-      class='row'
     >
       <div
         v-on:click="mountRecipe(validRecipe)"
@@ -11,21 +18,11 @@
                columns'
       >
         <div class='recipe-background'></div>
-        <div class='row'>
-          <h3>{{ validRecipe.title }}</h3>
-          <div class='small-6 columns'>
-          </div>
-          <div
-            class='small-6
-                   columns'
-          >
-          </div>
-        </div>
+        <img
+          :src='validRecipe.image'
+          class='recipe-image'
+        >
       </div>
-      <img
-        :src='validRecipe.image'
-        class='recipe-image'
-      >
 
 
     </div>
@@ -40,8 +37,6 @@ export default {
 
 <style>
 .recipe {
-  height: 450px;
-  width: 600px;
   margin: 0 0 1rem;
   padding: 1rem;
   border: 1px solid hsla(0, 0%, 4%, .25);
@@ -49,10 +44,15 @@ export default {
   position: relative;
 }
 
+.recipes-header {
+  font-family: Pacifico;
+  text-align: center;
+}
+
 .recipe-background {
   position: absolute;
   background-color: white;
-  opacity: 0.6;
+  opacity: 0.9;
   top: 0;
   bottom: 0;
   left: 0;
@@ -60,13 +60,13 @@ export default {
   z-index: -1;
 }
 
-.recipe-ingredient-container {
-  list-style-type: none;
+.recipes-container {
+  margin-top: 25px;
 }
 
 .recipe-image {
   height: 450px;
   width: 600px;
-  z-index: 50;
+  z-index: 1;
 }
 </style>

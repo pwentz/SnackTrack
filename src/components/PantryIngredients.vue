@@ -50,8 +50,8 @@ export default {
   background-color: lightgrey;
 }
 .pantry-item {
-  width: 250px;
-  height: 100px;
+  width: 350px;
+  height: 150px;
 }
 .pantry-item h5 {
   text-align: center;

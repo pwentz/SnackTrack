@@ -9,11 +9,11 @@
              small-centered
              recipe-instructions'
     >
-      <h3
+      <h2
         id='recipe-header'
       >
         {{ this.recipe.title }}
-      </h3>
+      </h2>
       <div
         class='row'
       >
@@ -37,7 +37,9 @@
           class='small-6
                  columns'
         >
-          <img v-bind:src='inlineImage'>
+          <img v-bind:src='inlineImage'
+               id='recipe-image'
+          >
         </div>
       </div>
 
@@ -56,27 +58,52 @@
             {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
           </p>
         </div>
+
       </div>
 
     </div>
+
+    <div
+      class='row'
+    >
+      <div
+        class='small-2
+               small-centered
+               columns'
+      >
+        <button
+          class='button
+                 eat-button'
+          v-on:click='recipeMade(ingredients)'
+          v-on:mouseenter="$store.dispatch('EXPAND_PANTRY')"
+          v-on:mouseleave="$store.dispatch('RETRACT_PANTRY')"
+        >
+          <i class='fi-lock'></i> Eat
+        </button>
+      </div>
+    </div>
+
     <div
       class='row'
     >
       <div
         class='btn-container
-               small-3
+               small-2
                columns
                small-centered'
       >
         <button
           class='button
+                 recipes-index-button
                  info'
           v-on:click='backToRecipes'
         >
-          Back to Recipes!
+          <i class='fi-arrow-left'></i> Recipes
         </button>
       </div>
     </div>
+
+
   </div>
 </template>
 
@@ -101,6 +128,7 @@ export default {
 <style>
 .recipe-instructions {
   margin-top: 20px;
+  font-family: Raleway;
 }
 #recipe-header {
   text-align: center;
@@ -108,5 +136,26 @@ export default {
 }
 .btn-container {
   margin: 0 auto;
+}
+#recipe-image {
+  border-radius: 12px;
+}
+.recipes-index-button {
+  background-color: #b3d6ff;
+  color: black;
+  font-family: Raleway;
+}
+.recipes-index-button:hover {
+  color: black;
+  background-color: #ffae00;
+}
+.eat-button {
+  color: black;
+  background-color: #ffae00;
+  font-family: Raleway;
+}
+.eat-button:hover {
+  color: white;
+  background-color: maroon;
 }
 </style>

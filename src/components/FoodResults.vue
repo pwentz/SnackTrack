@@ -36,6 +36,6 @@ export default {
 .ingredient {
   width: 350px;
   margin: 0 auto;
-  height: 150px;
+  height: 175px;
 }
 </style>
