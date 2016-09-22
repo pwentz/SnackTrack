@@ -2,7 +2,7 @@
   <div id="app">
     <nav-bar
       :signIn='signInUser'
-      :testStore='testThing'
+      :adjustPantryState='handlePantry'
       :signOut='signOutUser'
       :removeIngredient='handleDelete'
       :mountSearch='mountSearch'
@@ -11,7 +11,7 @@
     <h1 class='header'
         v-if='$store.state.searchMounted'
     >
-      Let's get cooking...
+      Let's get cookin'!
     </h1>
 
     <food-search
@@ -32,6 +32,7 @@
       :recipe='mountedRecipe'
       :ingredients='mountedIngredients'
       :backToRecipes='recipeIndex'
+      :recipeMade='handleRecipe'
       v-if='recipeIsMounted'
     >
     </recipe>
@@ -63,7 +64,8 @@ export default {
       mountedIngredients: state => state.mountedIngredients,
       recipeIsMounted: state => state.recipeIsMounted,
       recipesMounted: state => state.recipesMounted,
-      searchMounted: state => state.searchMounted
+      searchMounted: state => state.searchMounted,
+      pantryExpanded: state => state.pantryExpanded
     }
   },
   methods: {
@@ -79,22 +81,13 @@ export default {
       if (event.target.value === '') {
         console.log('NO REQUEST')
         this.$store.dispatch('FOOD_ROLLUP')
-        this.$store.dispatch('PANTRY_EXPANDED', false)
+        this.$store.dispatch('RETRACT_PANTRY')
       }
       else {
         this.$store.dispatch('FOOD_SEARCH', event)
         this.$store.dispatch('FOOD_DROPDOWN')
-        this.$store.dispatch('PANTRY_EXPANDED', true)
+        this.$store.dispatch('EXPAND_PANTRY')
       }
-    },
-
-    testThing() {
-      console.log(this.$store.state.currentUser)
-      this.pantryIngredients.forEach(obj => {
-        console.log(obj.name)
-        console.log(obj.amount)
-        console.log(obj.image)
-      })
     },
 
     addToPantry(id, amount) {
@@ -105,6 +98,9 @@ export default {
 
     fetchRecipes() {
       this.$store.dispatch('LOAD_RECIPES', this.pantryIngredients)
+      this.$store.dispatch('DISMOUNT_SEARCH')
+      this.$store.dispatch('RETRACT_PANTRY')
+      this.$store.dispatch('MOUNT_RECIPES')
       this.recipes.forEach(recipe => {
         console.log(recipe)
       })
@@ -125,6 +121,8 @@ export default {
     mountSearch() {
       this.$store.dispatch('DISMOUNT_RECIPES')
       this.$store.dispatch('DISMOUNT_RECIPE')
+      this.$store.dispatch('RETRACT_PANTRY')
+      this.$store.dispatch('FOOD_ROLLUP')
       this.$store.dispatch('MOUNT_SEARCH')
     },
 
@@ -139,8 +137,21 @@ export default {
       })
       if (confirm("Log recipe as eaten? If yes, we will remove the necessary ingredients from your pantry")) {
         this.$store.dispatch('REMOVE_BY_RECIPE', recipeIngredients)
+        this.$store.dispatch('LOAD_RECIPES', this.pantryIngredients)
+        this.$store.dispatch('MOUNT_RECIPES')
+        this.$store.dispatch('DISMOUNT_RECIPE')
+        this.$store.dispatch('RETRACT_PANTRY')
       }
     },
+
+    handlePantry() {
+      if (this.pantryExpanded) {
+        this.$store.dispatch('RETRACT_PANTRY')
+      }
+      else {
+        this.$store.dispatch('EXPAND_PANTRY')
+      }
+    }
   }
 }
 </script>
@@ -150,16 +161,10 @@ body {
   font-family: Helvetica, sans-serif;
   position: relative;
 }
-.background {
-  background-image: url('../assets/food-background.jpg');
+.app-background {
+  background-image: url('../assets/food_background.jpg');
   background-position: center;
-  opacity: 0.6;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: -1;
+  background-attachment: fixed;
 }
 .header {
   font-family: Pacifico;

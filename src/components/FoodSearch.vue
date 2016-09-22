@@ -4,6 +4,7 @@
     <input
       type='text'
       v-on:keyup="searchForFood($event)"
+      placeholder='Search by food...'
       data-dropdown='food-dropdown'
       aria-controls='food-dropdown'
       aria-expanded='false'
@@ -50,5 +51,12 @@ export default {
 }
 .recipe-button {
   margin: 0 auto;
+  font-family: Raleway;
+  background-color: #b3d6ff;
+  color: black;
+}
+.recipe-button:hover {
+  background-color: #ffae00;
+  color: black;
 }
 </style>

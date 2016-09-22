@@ -40,7 +40,7 @@
                 aria-expanded='false'
             >
               <a href='#'
-                 v-on:click="$store.dispatch('PANTRY_EXPANDED', !$store.state.pantryExpanded)"
+                 v-on:click="adjustPantryState"
               >Pantry</a>
             </li>
 
@@ -73,7 +73,7 @@ export default {
   components: {
     PantryIngredients
   },
-  props: ['signIn', 'signOut', 'testStore', 'removeIngredient', 'mountSearch']
+  props: ['signIn', 'signOut', 'adjustPantryState', 'removeIngredient', 'mountSearch']
 }
 </script>
 

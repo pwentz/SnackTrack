@@ -31,8 +31,12 @@ const mutations = {
     Vue.set(state, 'foodDropDown', false)
   },
 
-  PANTRY_EXPANDED (state, turnout) {
-    Vue.set(state, 'pantryExpanded', turnout)
+  EXPAND_PANTRY (state) {
+    Vue.set(state, 'pantryExpanded', true)
+  },
+
+  RETRACT_PANTRY (state) {
+    Vue.set(state, 'pantryExpanded', false)
   },
 
   ADD_TO_PANTRY (state) {

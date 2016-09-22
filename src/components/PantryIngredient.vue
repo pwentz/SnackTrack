@@ -3,6 +3,11 @@
     <div
       class='row'
     >
+      <h5
+        class='p-ingredient-name'
+      >
+        {{ this.name }}
+      </h5>
       <div
         class='small-4
                columns'
@@ -11,36 +16,19 @@
       </div>
 
       <div
-        class='small-4
-               columns'
-      >
-        <h5>{{ this.name }}</h5>
-      </div>
-
-      <div
-        class='small-4
+        class='small-8
                columns
                p-ingredient-details'
       >
 
-        <div
-          class='row'
-        >
-          <p>{{ this.amount }}</p>
-        </div>
+        Quantity: {{ this.amount }}
 
-        <div
-          class='row'
+        <a href='#'
+           class='pantry-x'
+           v-on:click='removeIngredient(id)'
         >
-          <div class='icon'>
-            <a href='#'
-               class='pantry-x'
-               v-on:click='removeIngredient(id)'
-            >
-              <i class='fi-x'></i>
-            </a>
-          </div>
-        </div>
+          <i class='fi-x'></i>
+        </a>
 
       </div>
 
@@ -62,6 +50,13 @@ export default {
 <style>
 .pantry-x, .pantry-x:hover {
   color: maroon;
+  margin-left: 15px;
 }
-
+.p-ingredient-details {
+  font-family: Raleway;
+}
+.p-ingredient-name {
+  font-family: Raleway;
+  text-align: center;
+}
 </style>
