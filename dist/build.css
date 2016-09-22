@@ -13,20 +13,8 @@ body {
   margin-top: 50px;
   font-size: 72px;
 }
-.food-search {
-  width: 350px;
-  margin: 0 auto;
-  margin-top: 50px;
-}
-.recipe-button {
-  margin: 0 auto;
-  font-family: Raleway;
-  background-color: #b3d6ff;
-  color: black;
-}
-.recipe-button:hover {
-  background-color: #ffae00;
-  color: black;
+#pantry-container {
+  margin-top: 15px;
 }
 .nav-bar-primary {
   background-color: #b3d6ff;
@@ -46,6 +34,21 @@ body {
   font-family: Raleway;
   font-size: 20px;
   font-weight: 800;
+}
+.food-search {
+  width: 350px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+.recipe-button {
+  margin: 0 auto;
+  font-family: Raleway;
+  background-color: #b3d6ff;
+  color: black;
+}
+.recipe-button:hover {
+  background-color: #ffae00;
+  color: black;
 }
 .recipe {
   margin: 0 0 1rem;
@@ -112,7 +115,22 @@ body {
   color: white;
   background-color: maroon;
 }
-#pantry-ingredients {
+.btn-container {
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+.ingredient-container {
+  height: 250px;
+}
+.ingredient-header, p {
+  text-align: center;
+  font-family: Raleway;
+}
+.ingredient-image-container {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+#most-recent-container {
   position: absolute;
   right: 0;
   top: 0;
@@ -120,6 +138,17 @@ body {
   margin-top: 65px;
   margin-right: 150px;
   background-color: lightgrey;
+}
+.pantry-x, .pantry-x:hover {
+  color: maroon;
+  margin-left: 15px;
+}
+.p-ingredient-details {
+  font-family: Raleway;
+}
+.p-ingredient-name {
+  font-family: Raleway;
+  text-align: center;
 }
 .pantry-item {
   width: 350px;
@@ -132,17 +161,6 @@ body {
   width: 350px;
   margin: 0 auto;
   height: 175px;
-}
-.pantry-x, .pantry-x:hover {
-  color: maroon;
-  margin-left: 15px;
-}
-.p-ingredient-details {
-  font-family: Raleway;
-}
-.p-ingredient-name {
-  font-family: Raleway;
-  text-align: center;
 }
 .fi-plus {
   color: green;

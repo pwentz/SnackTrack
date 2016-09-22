@@ -4,7 +4,6 @@
       :signIn='signInUser'
       :adjustPantryState='handlePantry'
       :signOut='signOutUser'
-      :removeIngredient='handleDelete'
       :mountSearch='mountSearch'
     >
     </nav-bar>
@@ -37,11 +36,19 @@
     >
     </recipe>
 
+    <pantry
+      v-if='pantryMounted'
+      :ingredients='pantryIngredients'
+      :removeIngredient='handleDelete'
+    >
+    </pantry>
+
   </div>
 </template>
 
 <script>
 require('./env.js')
+import Pantry from './components/Pantry.vue'
 import NavBar from './components/NavBar.vue'
 import FoodSearch from './components/FoodSearch.vue'
 import Recipes from './components/Recipes.vue'
@@ -52,6 +59,7 @@ export default {
     NavBar,
     FoodSearch,
     Recipes,
+    Pantry,
     Recipe
   },
 
@@ -65,9 +73,11 @@ export default {
       recipeIsMounted: state => state.recipeIsMounted,
       recipesMounted: state => state.recipesMounted,
       searchMounted: state => state.searchMounted,
-      pantryExpanded: state => state.pantryExpanded
+      mostRecentExpanded: state => state.mostRecentExpanded,
+      pantryMounted: state => state.pantryMounted
     }
   },
+
   methods: {
     signInUser() {
       this.$store.dispatch('LOGIN')
@@ -81,25 +91,25 @@ export default {
       if (event.target.value === '') {
         console.log('NO REQUEST')
         this.$store.dispatch('FOOD_ROLLUP')
-        this.$store.dispatch('RETRACT_PANTRY')
+        this.$store.dispatch('RETRACT_MOST_RECENT')
       }
       else {
         this.$store.dispatch('FOOD_SEARCH', event)
         this.$store.dispatch('FOOD_DROPDOWN')
-        this.$store.dispatch('EXPAND_PANTRY')
+        this.$store.dispatch('EXPAND_MOST_RECENT')
       }
     },
 
-    addToPantry(id, amount) {
-      this.$store.dispatch('ADD_INGREDIENT_ID', id)
-      this.$store.dispatch('ADD_INGREDIENT_AMOUNT', amount)
+    addToPantry(ingredient, amount) {
+      this.$store.dispatch('SET_RECENT_AMOUNT', amount)
+      this.$store.dispatch('ADD_RECENT_INGREDIENT', ingredient)
       this.$store.dispatch('ADD_TO_PANTRY')
     },
 
     fetchRecipes() {
       this.$store.dispatch('LOAD_RECIPES', this.pantryIngredients)
       this.$store.dispatch('DISMOUNT_SEARCH')
-      this.$store.dispatch('RETRACT_PANTRY')
+      this.$store.dispatch('RETRACT_MOST_RECENT')
       this.$store.dispatch('MOUNT_RECIPES')
       this.recipes.forEach(recipe => {
         console.log(recipe)
@@ -121,7 +131,7 @@ export default {
     mountSearch() {
       this.$store.dispatch('DISMOUNT_RECIPES')
       this.$store.dispatch('DISMOUNT_RECIPE')
-      this.$store.dispatch('RETRACT_PANTRY')
+      this.$store.dispatch('RETRACT_MOST_RECENT')
       this.$store.dispatch('FOOD_ROLLUP')
       this.$store.dispatch('MOUNT_SEARCH')
     },
@@ -140,16 +150,21 @@ export default {
         this.$store.dispatch('LOAD_RECIPES', this.pantryIngredients)
         this.$store.dispatch('MOUNT_RECIPES')
         this.$store.dispatch('DISMOUNT_RECIPE')
-        this.$store.dispatch('RETRACT_PANTRY')
+        this.$store.dispatch('RETRACT_MOST_RECENT')
       }
     },
 
     handlePantry() {
-      if (this.pantryExpanded) {
-        this.$store.dispatch('RETRACT_PANTRY')
+      if (this.pantryMounted) {
+        this.$store.dispatch('MOUNT_SEARCH')
+        this.$store.dispatch('MOUNT_PANTRY', false)
       }
       else {
-        this.$store.dispatch('EXPAND_PANTRY')
+        this.$store.dispatch('DISMOUNT_SEARCH')
+        this.$store.dispatch('DISMOUNT_RECIPES')
+        this.$store.dispatch('DISMOUNT_RECIPE')
+        this.$store.dispatch('RETRACT_MOST_RECENT')
+        this.$store.dispatch('MOUNT_PANTRY', true)
       }
     }
   }

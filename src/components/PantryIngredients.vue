@@ -1,9 +1,6 @@
 <template>
   <div id='pantry-ingredients'>
     <div
-      data-dropdown='pantry-dropdown'
-      aria-controls='pantry-dropdown'
-      aria-expanded='false'
     >
       <div
         id='pantry-dropdown'
@@ -48,12 +45,5 @@ export default {
   margin-top: 65px;
   margin-right: 150px;
   background-color: lightgrey;
-}
-.pantry-item {
-  width: 350px;
-  height: 150px;
-}
-.pantry-item h5 {
-  text-align: center;
 }
 </style>

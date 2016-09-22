@@ -1,36 +1,48 @@
 <template>
-  <div>
+  <div
+    class='ingredient-container'
+  >
     <div
       class='row'
     >
-      <h5
-        class='p-ingredient-name'
+      <h4
+        class='ingredient-header'
       >
-        {{ this.name }}
-      </h5>
+        {{ ingredient.name }}
+      </h4>
+      <p>
+        Quantity: {{ ingredient.amount }}
+      </p>
+
       <div
         class='small-4
+               ingredient-image-container
+               small-centered
                columns'
       >
-        <img v-bind:src="url">
+        <img
+          :src='imageUrl'
+        >
       </div>
 
       <div
-        class='small-8
-               columns
-               p-ingredient-details'
+        class='row'
       >
-
-        Quantity: {{ this.amount }}
-
-        <a href='#'
-           class='pantry-x'
-           v-on:click='removeIngredient(id)'
+        <div
+          class='small-3
+                 small-centered
+                 btn-container
+                 columns'
         >
-          <i class='fi-x'></i>
-        </a>
-
+          <button
+            v-on:click='removeIngredient(ingredient.id)'
+            class='button
+                   alert'
+          >
+            <i class='fi-trash'></i>
+          </button>
       </div>
+
 
     </div>
   </div>
@@ -38,25 +50,29 @@
 
 <script>
 export default {
-  props: ['name', 'amount', 'image', 'removeIngredient', 'id'],
+  props: ['ingredient', 'removeIngredient'],
   computed: {
-    url() {
-      return `https://spoonacular.com/cdn/ingredients_100x100/${this.image}`
+    imageUrl() {
+      return `https://spoonacular.com/cdn/ingredients_100x100/${this.ingredient.image}`
     }
   }
 }
 </script>
 
 <style>
-.pantry-x, .pantry-x:hover {
-  color: maroon;
-  margin-left: 15px;
+.btn-container {
+  margin-top: 20px;
+  margin-bottom: 5px;
 }
-.p-ingredient-details {
-  font-family: Raleway;
+.ingredient-container {
+  height: 250px;
 }
-.p-ingredient-name {
-  font-family: Raleway;
+.ingredient-header, p {
   text-align: center;
+  font-family: Raleway;
+}
+.ingredient-image-container {
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 </style>
