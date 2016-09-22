@@ -1,48 +1,82 @@
 <template>
-  <div>
+  <div
+    class='row'
+  >
     <div
-      class='recipe
-             small-6
-             columns'
+      class='callout
+             small-12
+             columns
+             small-centered
+             recipe-instructions'
     >
-      <div class='recipe-background'></div>
-      <div class='row'>
-        <h3>{{ this.title }}</h3>
-        <div class='small-6 columns'>
-          <ul
-            class='recipe-ingredient-container'
-          >
-            <li
-              v-for='ingredient in ingredients'
-            >
+      <h3
+        id='recipe-header'
+      >
+        {{ this.recipe.title }}
+      </h3>
+      <div
+        class='row'
+      >
 
-              <recipe-ingredient
-                :name='ingredient.name'
-                :amount='ingredient.amount'
-              >
-              </recipe-ingredient>
-
-            </li>
-          </ul>
-        </div>
         <div
           class='small-6
                  columns'
         >
-          <button
-            v-on:click='recipeMade(ingredients)'
-            class='button
-                   info'
+          <ul
+            class='recipe-instructions'
           >
-            Click me!
-          </button>
+            <li
+              v-for='step in formattedInstructions'
+            >
+              {{ step }}
+            </li>
+          </ul>
+        </div>
+
+        <div
+          class='small-6
+                 columns'
+        >
+          <img v-bind:src='inlineImage'>
         </div>
       </div>
+
+      <hr>
+
+      <div
+        class='row'
+      >
+        <div
+          class='small-4
+                 columns'
+        >
+          <p
+            v-for='ingredient in ingredients'
+          >
+            {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
+          </p>
+        </div>
+      </div>
+
     </div>
-    <img
-      :src='recipeImage'
-      class='recipe-image'
+    <div
+      class='row'
     >
+      <div
+        class='btn-container
+               small-3
+               columns
+               small-centered'
+      >
+        <button
+          class='button
+                 info'
+          v-on:click='backToRecipes'
+        >
+          Back to Recipes!
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -52,44 +86,27 @@ export default {
   components: {
     RecipeIngredient
   },
-  props: ['id', 'title', 'image', 'readyTime', 'ingredients', 'recipeMade'],
+  props: ['recipe', 'ingredients', 'recipeMade', 'backToRecipes'],
   computed: {
-    recipeImage() {
-      return this.image
+    inlineImage() {
+      return this.recipe.image
+    },
+    formattedInstructions() {
+      return this.recipe.instructions.split('.')
     }
   }
 }
 </script>
 
 <style>
-.recipe {
-  height: 450px;
-  width: 600px;
-  margin: 0 0 1rem;
-  padding: 1rem;
-  border: 1px solid hsla(0, 0%, 4%, .25);
-  border-radius: 0;
-  position: relative;
+.recipe-instructions {
+  margin-top: 20px;
 }
-
-.recipe-background {
-  position: absolute;
-  background-color: white;
-  opacity: 0.6;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: -1;
+#recipe-header {
+  text-align: center;
+  font-family: Pacifico;
 }
-
-.recipe-ingredient-container {
-  list-style-type: none;
-}
-
-.recipe-image {
-  height: 450px;
-  width: 600px;
-  z-index: 50;
+.btn-container {
+  margin: 0 auto;
 }
 </style>

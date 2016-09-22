@@ -27,14 +27,15 @@ class OauthHelper {
 
   signIn() {
     this.auth2.signIn();
-    let userId = this.auth2.currentUser.get().getBasicProfile().Eea
-    let userName = this.auth2.currentUser.get().getBasicProfile().getGivenName()
-    api.setCurrentUser(userId, userName).
-      then(response => {
-        Vue.set(this.state, 'currentUser', userId)
-        Vue.set(this.state, 'pantryIngredients', response.body)
-        console.log(this.state.pantryIngredients)
-      })
+    if (this.auth2.isSignedIn.get()) {
+      let userId = this.auth2.currentUser.get().getBasicProfile().Eea
+      let userName = this.auth2.currentUser.get().getBasicProfile().getGivenName()
+      api.setCurrentUser(userId, userName).
+        then(response => {
+          Vue.set(this.state, 'pantryIngredients', response.body)
+          console.log(this.state.pantryIngredients)
+        })
+    }
   }
 
   signOut() {

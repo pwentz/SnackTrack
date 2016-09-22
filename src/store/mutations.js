@@ -36,9 +36,9 @@ const mutations = {
   },
 
   ADD_TO_PANTRY (state) {
-    let id = state.addedIngredientId
+    let id = oauth.auth2.currentUser.get().getBasicProfile().Eea
     let amount = state.addedIngredientAmount
-    api.addIngredient(id, amount, state.currentUser).
+    api.addIngredient(state.addedIngredientId, amount, id).
       then(response => {
         Vue.set(state, 'pantryIngredients', response.body)
       })
@@ -60,24 +60,52 @@ const mutations = {
   },
 
   REMOVE_FROM_PANTRY (state, ingredientId) {
+    let id = oauth.auth2.currentUser.get().getBasicProfile().Eea
     api.
-      destroyPantryIngredient(ingredientId, state.currentUser).
+      destroyPantryIngredient(ingredientId, id).
       then(response => {
         Vue.set(state, 'pantryIngredients', response.body)
       })
   },
 
-  RENDER_RECIPES (state) {
-    Vue.set(state, 'recipesRendered', !state.recipesRendered)
+  MOUNT_RECIPES (state) {
+    Vue.set(state, 'recipesMounted', true)
+  },
+
+  DISMOUNT_SEARCH (state) {
+    Vue.set(state, 'searchMounted', false)
+  },
+
+  DISMOUNT_RECIPES (state) {
+    Vue.set(state, 'recipesMounted', false)
+  },
+
+  MOUNT_SEARCH (state) {
+    Vue.set(state, 'searchMounted', true)
   },
 
   REMOVE_BY_RECIPE (state, ingredients) {
+    let id = oauth.auth2.currentUser.get().getBasicProfile().Eea
     api.
-      updatePantryIngredients(ingredients, state.currentUser).
+      updatePantryIngredients(ingredients, id).
       then(response => {
         Vue.set(state, 'pantryIngredients', response.body)
       })
-  }
+  },
 
+  MOUNT_RECIPE (state, recipe) {
+    api.
+      getRecipe(recipe.spoon_id).
+      then(response => {
+        Vue.set(state, 'mountedRecipe', response.body)
+        Vue.set(state, 'mountedIngredients', response.body.recipe_ingredients)
+        console.log(response.body.recipe_ingredients)
+        Vue.set(state, 'recipeIsMounted', true)
+      })
+  },
+
+  DISMOUNT_RECIPE (state) {
+    Vue.set(state, 'recipeIsMounted', false)
+  }
 }
 module.exports = mutations

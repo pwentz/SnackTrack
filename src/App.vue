@@ -5,33 +5,37 @@
       :testStore='testThing'
       :signOut='signOutUser'
       :removeIngredient='handleDelete'
+      :mountSearch='mountSearch'
     >
     </nav-bar>
     <h1 class='header'
-        v-if='!$store.state.recipesRendered'
+        v-if='$store.state.searchMounted'
     >
       Let's get cooking...
     </h1>
 
     <food-search
-      v-if='!$store.state.recipesRendered'
+      v-if='$store.state.searchMounted'
       :searchForFood='searchForFood'
       :addToPantry='addToPantry'
+      :fetchRecipes='fetchRecipes'
     >
     </food-search>
 
     <recipes
-      v-else
-      :passIngredients='handleRecipe'
+      v-if='recipesMounted'
+      :mountRecipe='mountRecipe'
     >
     </recipes>
 
-    <button class='button
-                   warning'
-            v-on:click='fetchRecipes'
+    <recipe
+      :recipe='mountedRecipe'
+      :ingredients='mountedIngredients'
+      :backToRecipes='recipeIndex'
+      v-if='recipeIsMounted'
     >
-      <i class='fi-save'></i>
-    </button>
+    </recipe>
+
   </div>
 </template>
 
@@ -40,18 +44,26 @@ require('./env.js')
 import NavBar from './components/NavBar.vue'
 import FoodSearch from './components/FoodSearch.vue'
 import Recipes from './components/Recipes.vue'
+import Recipe from './components/Recipe.vue'
 
 export default {
   components: {
     NavBar,
     FoodSearch,
-    Recipes
+    Recipes,
+    Recipe
   },
+
   vuex: {
     getters: {
       searchTerm: state => state.searchTerm,
       pantryIngredients: state => state.pantryIngredients,
-      recipes: state => state.recipes
+      recipes: state => state.recipes,
+      mountedRecipe: state => state.mountedRecipe,
+      mountedIngredients: state => state.mountedIngredients,
+      recipeIsMounted: state => state.recipeIsMounted,
+      recipesMounted: state => state.recipesMounted,
+      searchMounted: state => state.searchMounted
     }
   },
   methods: {
@@ -93,10 +105,27 @@ export default {
 
     fetchRecipes() {
       this.$store.dispatch('LOAD_RECIPES', this.pantryIngredients)
-      this.$store.dispatch('RENDER_RECIPES')
       this.recipes.forEach(recipe => {
         console.log(recipe)
       })
+    },
+
+    recipeIndex() {
+      this.$store.dispatch('DISMOUNT_RECIPE')
+      this.$store.dispatch('MOUNT_RECIPES')
+      this.$store.dispatch('DISMOUNT_SEARCH')
+    },
+
+    mountRecipe(recipe) {
+      this.$store.dispatch('DISMOUNT_RECIPES')
+      this.$store.dispatch('DISMOUNT_SEARCH')
+      this.$store.dispatch('MOUNT_RECIPE', recipe)
+    },
+
+    mountSearch() {
+      this.$store.dispatch('DISMOUNT_RECIPES')
+      this.$store.dispatch('DISMOUNT_RECIPE')
+      this.$store.dispatch('MOUNT_SEARCH')
     },
 
     handleDelete(ingredientId) {
@@ -111,7 +140,7 @@ export default {
       if (confirm("Log recipe as eaten? If yes, we will remove the necessary ingredients from your pantry")) {
         this.$store.dispatch('REMOVE_BY_RECIPE', recipeIngredients)
       }
-    }
+    },
   }
 }
 </script>

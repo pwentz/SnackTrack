@@ -47,7 +47,7 @@
             <ul class='menu'>
               <li>
                 <a href='#'
-                   v-on:click='testStore'
+                   v-on:click="mountSearch"
                    class='menu-text'
                 >
                   SnackTrack
@@ -73,7 +73,7 @@ export default {
   components: {
     PantryIngredients
   },
-  props: ['signIn', 'signOut', 'testStore', 'removeIngredient']
+  props: ['signIn', 'signOut', 'testStore', 'removeIngredient', 'mountSearch']
 }
 </script>
 
