@@ -16,6 +16,11 @@ body {
 #pantry-container {
   margin-top: 15px;
 }
+.label {
+  margin-left: 10px;
+  background-color: #ffae00;
+  color: black;
+}
 .nav-bar-primary {
   background-color: #b3d6ff;
 }
@@ -34,22 +39,6 @@ body {
   font-family: Raleway;
   font-size: 20px;
   font-weight: 800;
-}
-.food-search {
-  width: 350px;
-  margin: 0 auto;
-  margin-top: 50px;
-}
-.recipe-button {
-  margin: 0 auto;
-  font-family: Raleway;
-  background-color: #b3d6ff;
-  color: black;
-  margin-bottom: 25px;
-}
-.recipe-button:hover {
-  background-color: #ffae00;
-  color: black;
 }
 .recipe {
   margin: 0 0 1rem;
@@ -83,6 +72,22 @@ body {
   height: 450px;
   width: 600px;
   z-index: 1;
+}
+.food-search {
+  width: 350px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+.recipe-button {
+  margin: 0 auto;
+  font-family: Raleway;
+  background-color: #b3d6ff;
+  color: black;
+  margin-bottom: 25px;
+}
+.recipe-button:hover {
+  background-color: #ffae00;
+  color: black;
 }
 .recipe-instructions {
   margin-top: 20px;

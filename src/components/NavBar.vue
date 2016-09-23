@@ -41,7 +41,7 @@
             >
               <a href='#'
                  v-on:click="adjustPantryState"
-              >Pantry</a>
+                 >Pantry<span class='label'>{{ this.pantryCount }}</span></a>
             </li>
 
             <ul class='menu'>
@@ -71,6 +71,11 @@
 <script>
 import RecentIngredient from './RecentIngredient.vue'
 export default {
+  computed: {
+    pantryCount() {
+      return this.$store.state.pantryIngredients.length
+    }
+  },
   components: {
     RecentIngredient
   },
@@ -79,6 +84,11 @@ export default {
 </script>
 
 <style>
+.label {
+  margin-left: 10px;
+  background-color: #ffae00;
+  color: black;
+}
 .nav-bar-primary {
   background-color: #b3d6ff;
 }
