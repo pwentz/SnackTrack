@@ -59,19 +59,20 @@
         </div>
       </div>
     </div>
-    <pantry-ingredients
+    <recent-ingredient
         v-if='$store.state.pantryExpanded'
         :removeIngredient='removeIngredient'
+        :ingredient='$store.state.mostRecentIngredient'
     >
-    </pantry-ingredients>
+    </recent-ingredient>
   </div>
 </template>
 
 <script>
-import PantryIngredients from './PantryIngredients.vue'
+import RecentIngredient from './RecentIngredient.vue'
 export default {
   components: {
-    PantryIngredients
+    RecentIngredient
   },
   props: ['signIn', 'signOut', 'adjustPantryState', 'removeIngredient', 'mountSearch']
 }

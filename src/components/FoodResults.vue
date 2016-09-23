@@ -11,9 +11,7 @@
     >
 
       <searched-ingredients
-        :name='ingredient.name'
-        :image='ingredient.image'
-        :id='ingredient.id'
+        :ingredient='ingredient'
         :addIngredient='addIngredient'
       >
       </searched-ingredients>

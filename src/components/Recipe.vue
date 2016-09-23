@@ -78,7 +78,7 @@
           v-on:mouseenter="$store.dispatch('EXPAND_PANTRY')"
           v-on:mouseleave="$store.dispatch('RETRACT_PANTRY')"
         >
-          <i class='fi-lock'></i> Eat
+          Eat
         </button>
       </div>
     </div>

@@ -3,16 +3,18 @@ const state = {
   recipes: [],
   pantryIngredients: [],
   mountedIngredients: [],
+  mostRecentIngredient: {},
+  mostRecentAmount: 0,
   mountedRecipe: {},
   recipeIsMounted: false,
   signedIn: false,
   foodDropDown: false,
-  pantryExpanded: false,
+  mostRecentExpanded: false,
+  pantryMounted: false,
   recipesMounted: false,
   searchMounted: true,
   searchTerm: '',
   currentUser: '',
-  addedIngredientId: '',
-  addedIngredientAmount: ''
+  recentIngredientAmount: ''
 }
 module.exports = state

@@ -12,9 +12,9 @@
              columns
              food-name'
       >
-      <h5>{{ name }}</h5>
+      <h5>{{ ingredient.name }}</h5>
       <button
-        v-on:click="addIngredient(id, amount)"
+        v-on:click="addIngredient(ingredient, amount)"
         class='success
                add-button
                button'
@@ -50,10 +50,10 @@ export default {
       amount: 1
     }
   },
-  props: ['name', 'image', 'id', 'addIngredient'],
+  props: ['ingredient', 'addIngredient'],
   computed: {
     url() {
-      return `https://spoonacular.com/cdn/ingredients_100x100/${this.image}`
+      return `https://spoonacular.com/cdn/ingredients_100x100/${this.ingredient.image}`
     }
   }
 }

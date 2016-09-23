@@ -31,29 +31,29 @@ const mutations = {
     Vue.set(state, 'foodDropDown', false)
   },
 
-  EXPAND_PANTRY (state) {
-    Vue.set(state, 'pantryExpanded', true)
+  EXPAND_MOST_RECENT (state) {
+    Vue.set(state, 'mostRecentExpanded', true)
   },
 
-  RETRACT_PANTRY (state) {
-    Vue.set(state, 'pantryExpanded', false)
+  RETRACT_MOST_RECENT (state) {
+    Vue.set(state, 'mostRecentExpanded', false)
   },
 
   ADD_TO_PANTRY (state) {
     let id = oauth.auth2.currentUser.get().getBasicProfile().Eea
-    let amount = state.addedIngredientAmount
-    api.addIngredient(state.addedIngredientId, amount, id).
+    let mostRecentId = state.mostRecentIngredient.id
+    api.addIngredient(mostRecentId, state.mostRecentAmount, id).
       then(response => {
         Vue.set(state, 'pantryIngredients', response.body)
       })
   },
 
-  ADD_INGREDIENT_ID (state, id) {
-    Vue.set(state, 'addedIngredientId', id)
+  SET_RECENT_AMOUNT (state, amount) {
+    Vue.set(state, 'mostRecentAmount', amount)
   },
 
-  ADD_INGREDIENT_AMOUNT (state, amount) {
-    Vue.set(state, 'addedIngredientAmount', amount)
+  ADD_RECENT_INGREDIENT (state, ingredient) {
+    Vue.set(state, 'mostRecentIngredient', ingredient)
   },
 
   LOAD_RECIPES (state, ingredients) {
@@ -110,6 +110,10 @@ const mutations = {
 
   DISMOUNT_RECIPE (state) {
     Vue.set(state, 'recipeIsMounted', false)
+  },
+
+  MOUNT_PANTRY (state, turnout) {
+    Vue.set(state, 'pantryMounted', turnout)
   }
 }
 module.exports = mutations
