@@ -114,6 +114,14 @@ const mutations = {
 
   MOUNT_PANTRY (state, turnout) {
     Vue.set(state, 'pantryMounted', turnout)
+  },
+
+  MOUNT_INTRODUCTION (state) {
+    Vue.set(state, 'introductionMounted', true)
+  },
+
+  DISMOUNT_INTRODUCTION (state) {
+    Vue.set(state, 'introductionMounted', false)
   }
 }
 module.exports = mutations
