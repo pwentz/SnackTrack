@@ -60,7 +60,7 @@
       </div>
     </div>
     <recent-ingredient
-        v-if='$store.state.pantryExpanded'
+        v-if='$store.state.mostRecentExpanded'
         :removeIngredient='removeIngredient'
         :ingredient='$store.state.mostRecentIngredient'
     >
