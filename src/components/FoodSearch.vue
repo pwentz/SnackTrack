@@ -1,15 +1,6 @@
 <template>
   <div class='food-search'>
 
-    <input
-      type='text'
-      v-on:keyup="searchForFood($event)"
-      placeholder='Search by food...'
-      data-dropdown='food-dropdown'
-      aria-controls='food-dropdown'
-      aria-expanded='false'
-    >
-
     <div class='row'>
       <div
         class='small-5
@@ -23,6 +14,16 @@
           Get Recipes!
         </button>
     </div>
+
+    <input
+      type='text'
+      v-on:keyup="searchForFood($event)"
+      placeholder='Search by food...'
+      data-dropdown='food-dropdown'
+      aria-controls='food-dropdown'
+      aria-expanded='false'
+    >
+
 
     <food-results
       v-if='$store.state.foodDropDown'
@@ -54,6 +55,7 @@ export default {
   font-family: Raleway;
   background-color: #b3d6ff;
   color: black;
+  margin-bottom: 25px;
 }
 .recipe-button:hover {
   background-color: #ffae00;

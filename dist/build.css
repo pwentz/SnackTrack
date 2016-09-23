@@ -45,6 +45,7 @@ body {
   font-family: Raleway;
   background-color: #b3d6ff;
   color: black;
+  margin-bottom: 25px;
 }
 .recipe-button:hover {
   background-color: #ffae00;
