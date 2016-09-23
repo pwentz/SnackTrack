@@ -131,6 +131,7 @@ export default {
     mountSearch() {
       this.$store.dispatch('DISMOUNT_RECIPES')
       this.$store.dispatch('DISMOUNT_RECIPE')
+      this.$store.dispatch('MOUNT_PANTRY', false)
       this.$store.dispatch('RETRACT_MOST_RECENT')
       this.$store.dispatch('FOOD_ROLLUP')
       this.$store.dispatch('MOUNT_SEARCH')
