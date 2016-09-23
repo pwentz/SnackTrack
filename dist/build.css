@@ -13,6 +13,18 @@ body {
   margin-top: 50px;
   font-size: 72px;
 }
+.intro {
+  margin-top: 20px;
+}
+#intro-header {
+  text-align: center;
+  font-family: Raleway;
+}
+#intro-list {
+}
+#intro-list li {
+  font-family: Raleway;
+}
 #pantry-container {
   margin-top: 15px;
 }

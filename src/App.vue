@@ -43,11 +43,18 @@
     >
     </pantry>
 
+    <introduction
+      v-if='introductionMounted'
+    >
+    </introduction>
+
+
   </div>
 </template>
 
 <script>
 require('./env.js')
+import Introduction from './components/Introduction.vue'
 import Pantry from './components/Pantry.vue'
 import NavBar from './components/NavBar.vue'
 import FoodSearch from './components/FoodSearch.vue'
@@ -60,7 +67,8 @@ export default {
     FoodSearch,
     Recipes,
     Pantry,
-    Recipe
+    Recipe,
+    Introduction
   },
 
   vuex: {
@@ -74,13 +82,16 @@ export default {
       recipesMounted: state => state.recipesMounted,
       searchMounted: state => state.searchMounted,
       mostRecentExpanded: state => state.mostRecentExpanded,
-      pantryMounted: state => state.pantryMounted
+      pantryMounted: state => state.pantryMounted,
+      introductionMounted: state => state.introductionMounted
     }
   },
 
   methods: {
     signInUser() {
       this.$store.dispatch('LOGIN')
+      this.$store.dispatch('MOUNT_SEARCH')
+      this.$store.dispatch('DISMOUNT_INTRODUCTION')
     },
 
     signOutUser() {

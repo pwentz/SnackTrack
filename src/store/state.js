@@ -12,7 +12,8 @@ const state = {
   mostRecentExpanded: false,
   pantryMounted: false,
   recipesMounted: false,
-  searchMounted: true,
+  introductionMounted: true,
+  searchMounted: false,
   searchTerm: '',
   currentUser: '',
   recentIngredientAmount: ''
